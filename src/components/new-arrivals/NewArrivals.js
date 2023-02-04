@@ -31,9 +31,29 @@ export default function NewArrivals() {
               </a>
             </L.Desc>
           </div>
-          <div className="bg-white rounded-xl p-5 flex justify-center gap-5 overflow-x-auto">
+          <div className="bg-white rounded-xl p-5 hidden lg:flex justify-center gap-5 overflow-x-auto">
             <Swiper
               slidesPerView={5}
+              navigation={true}
+              spaceBetween={20}
+              freeMode={true}
+              modules={[Navigation, FreeMode]}
+              className="mySwiper"
+            >
+              {data.map((e, i) => {
+                if (38 < i && i < 45) {
+                  return (
+                    <SwiperSlide key={i + "a"}>
+                      <Card data={e}></Card>
+                    </SwiperSlide>
+                  );
+                }
+              })}
+            </Swiper>
+          </div>
+          <div className="bg-white rounded-xl p-5 flex lg:hidden justify-center gap-5 overflow-x-auto">
+            <Swiper
+              slidesPerView={2}
               navigation={true}
               spaceBetween={20}
               freeMode={true}
@@ -60,7 +80,7 @@ export default function NewArrivals() {
 export const Card = ({ data, href = "/" }) => (
   <a
     href={"/product?id=" + data?.model}
-    className="flex flex-col items-start bg-white max-w-[290px] w-56"
+    className="flex flex-col items-start bg-white w-[290px]"
   >
     <div className="flex items-center w-full aspect-square bg-white rounded-xl overflow-hidden">
       <img
@@ -71,7 +91,9 @@ export const Card = ({ data, href = "/" }) => (
     </div>
     <div className="flex flex-col p-4 text-start">
       <div className="lg:text-lg font-medium text-navy">{data?.name}</div>
-      <div className="font-medium text-red-700">${data?.price}</div>
+      <div className="font-medium text-red-700">
+        ${parseFloat(data?.price).toFixed(2)}
+      </div>
     </div>
   </a>
 );

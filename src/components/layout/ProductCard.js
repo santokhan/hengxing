@@ -32,7 +32,7 @@ export function Name({ children }) {
 }
 
 export function Price({ children }) {
-  return <div className="font-medium text-red-700">{children}</div>;
+  return <div className="font-medium text-red-700">${children}</div>;
 }
 
 export const Product = { Card, Image, Info, Name, Price };
